@@ -18,20 +18,45 @@ export default function CardStackHero() {
     layoutEffect: false,
   });
 
-  // Pre-calculate transforms for all images
-  const transforms = images.map((_, index) => {
-    const fanRotations = [-0, -0, 0, 0, 0];
-    const fanOffsetsX = [-685, -350, 0, 350, 685];
-    const fanOffsetsY = [-0, -30, -65, -30, -0];
-    const fanScales = [0.9, 0.95, 1, 0.95, 0.9];
+  // Define transforms for each image outside the map
+  const fanRotations = [-0, -0, 0, 0, 0];
+  const fanOffsetsX = [-685, -350, 0, 350, 685];
+  const fanOffsetsY = [-0, -30, -65, -30, -0];
+  const fanScales = [0.9, 0.95, 1, 0.95, 0.9];
 
-    return {
-      x: useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsX[index]]),
-      y: useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsY[index]]),
-      rotate: useTransform(scrollYProgress, [0, 0.2], [0, fanRotations[index]]),
-      scale: useTransform(scrollYProgress, [0, 0.2], [1, fanScales[index]])
-    };
-  });
+  // Create transform hooks for each image position
+  const x0 = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsX[0]]);
+  const y0 = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsY[0]]);
+  const rotate0 = useTransform(scrollYProgress, [0, 0.2], [0, fanRotations[0]]);
+  const scale0 = useTransform(scrollYProgress, [0, 0.2], [1, fanScales[0]]);
+
+  const x1 = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsX[1]]);
+  const y1 = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsY[1]]);
+  const rotate1 = useTransform(scrollYProgress, [0, 0.2], [0, fanRotations[1]]);
+  const scale1 = useTransform(scrollYProgress, [0, 0.2], [1, fanScales[1]]);
+
+  const x2 = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsX[2]]);
+  const y2 = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsY[2]]);
+  const rotate2 = useTransform(scrollYProgress, [0, 0.2], [0, fanRotations[2]]);
+  const scale2 = useTransform(scrollYProgress, [0, 0.2], [1, fanScales[2]]);
+
+  const x3 = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsX[3]]);
+  const y3 = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsY[3]]);
+  const rotate3 = useTransform(scrollYProgress, [0, 0.2], [0, fanRotations[3]]);
+  const scale3 = useTransform(scrollYProgress, [0, 0.2], [1, fanScales[3]]);
+
+  const x4 = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsX[4]]);
+  const y4 = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsY[4]]);
+  const rotate4 = useTransform(scrollYProgress, [0, 0.2], [0, fanRotations[4]]);
+  const scale4 = useTransform(scrollYProgress, [0, 0.2], [1, fanScales[4]]);
+
+  const transforms = [
+    { x: x0, y: y0, rotate: rotate0, scale: scale0 },
+    { x: x1, y: y1, rotate: rotate1, scale: scale1 },
+    { x: x2, y: y2, rotate: rotate2, scale: scale2 },
+    { x: x3, y: y3, rotate: rotate3, scale: scale3 },
+    { x: x4, y: y4, rotate: rotate4, scale: scale4 },
+  ];
 
   return (
     <div ref={containerRef} className="relative w-full h-[90vh] bg-[#f9f6ef]">
