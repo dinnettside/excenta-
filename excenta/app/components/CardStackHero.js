@@ -18,6 +18,21 @@ export default function CardStackHero() {
     layoutEffect: false,
   });
 
+  // Pre-calculate transforms for all images
+  const transforms = images.map((_, index) => {
+    const fanRotations = [-0, -0, 0, 0, 0];
+    const fanOffsetsX = [-685, -350, 0, 350, 685];
+    const fanOffsetsY = [-0, -30, -65, -30, -0];
+    const fanScales = [0.9, 0.95, 1, 0.95, 0.9];
+
+    return {
+      x: useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsX[index]]),
+      y: useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsY[index]]),
+      rotate: useTransform(scrollYProgress, [0, 0.2], [0, fanRotations[index]]),
+      scale: useTransform(scrollYProgress, [0, 0.2], [1, fanScales[index]])
+    };
+  });
+
   return (
     <div ref={containerRef} className="relative w-full h-[90vh] bg-[#f9f6ef]">
       <div className="min-h-[55vh] flex items-center justify-center">
@@ -25,25 +40,16 @@ export default function CardStackHero() {
           {images.map((image, index) => {
             const centerIndex = 2;
             const level = Math.abs(index - centerIndex);
-
-            const fanRotations = [-0, -0, 0, 0, 0];
-            const fanOffsetsX = [-685, -350, 0, 350, 685];
-            const fanOffsetsY = [-0, -30, -65, -30, -0];
-            const fanScales = [0.9, 0.95, 1, 0.95, 0.9];
-
-            const x = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsX[index]]);
-            const y = useTransform(scrollYProgress, [0, 0.2], [0, fanOffsetsY[index]]);
-            const rotate = useTransform(scrollYProgress, [0, 0.2], [0, fanRotations[index]]);
-            const scale = useTransform(scrollYProgress, [0, 0.2], [1, fanScales[index]]);
+            const transform = transforms[index];
 
             return (
               <motion.div
                 key={index}
                 style={{
-                  x,
-                  y,
-                  rotate,
-                  scale,
+                  x: transform.x,
+                  y: transform.y,
+                  rotate: transform.rotate,
+                  scale: transform.scale,
                   zIndex: 20 - level,
                   width: "340px",
                   height: "510px",
