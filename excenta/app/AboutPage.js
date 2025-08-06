@@ -31,7 +31,20 @@ const AboutPage = () => {
         </ScrollReveal>
         
         <ScrollReveal direction="right" delay={200} className="lg:w-1/2 relative">
-          <HeroAnimated />
+          {/* Desktop version - kompleks animasjon */}
+          <div className="hidden lg:block">
+            <HeroAnimated />
+          </div>
+          
+          {/* Mobile version - enkelt bilde */}
+          <div className="lg:hidden w-full max-w-[350px] mx-auto">
+            <img
+              src="/kitchen1.webp"
+              alt="Vårt håndverk"
+              className="w-full h-[400px] object-cover rounded-2xl shadow-lg"
+              loading="lazy"
+            />
+          </div>
         </ScrollReveal>
       </section>
 

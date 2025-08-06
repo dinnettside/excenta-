@@ -60,7 +60,12 @@ function Navbar() {
     <>
       <nav className="fixed top-0 left-0 w-full z-50 bg-[#f9f6ef] px-6 py-4 flex items-center justify-between shadow-none">
         {/* Logo */}
-        <a href="/" className="text-base font-semibold text-black hover:opacity-75 transition-opacity">
+        <a href="/" className="text-base font-semibold text-black hover:opacity-75 transition-opacity flex items-center gap-2">
+          <img 
+            src="/favicon.webp" 
+            alt="Excenta logo" 
+            className="w-6 h-6 rounded-sm"
+          />
           EXCENTA AS
         </a>
 
@@ -123,6 +128,7 @@ function Navbar() {
                 <li key={item.label}>
                   <button
                     onClick={() => handleItemClick(item.href)}
+                    tabIndex={open ? 0 : -1}
                     className="text-3xl font-semibold tracking-wide text-white relative px-1 group"
                   >
                     <span>{item.label}</span>

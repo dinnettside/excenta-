@@ -54,16 +54,32 @@ export default function ScrollImageSection() {
   return (
     <section className="relative flex flex-col lg:flex-row w-full bg-[#f9f6ef]">
       {/* Left: Text Sections */}
-      <div className="w-full lg:w-1/2 px-6 lg:px-24 py-0 space-y-[10vh]">
+      <div className="w-full lg:w-1/2 px-6 lg:px-24 py-0 space-y-[10vh] lg:space-y-[10vh]">
         {sections.map((item, i) => (
-          <div key={i} className="text-section h-screen flex flex-col justify-center">
+          <div key={i} className="text-section flex flex-col justify-center min-h-screen lg:h-screen">
             <h2 className="font-['Playfair_Display'] text-4xl font-bold text-black mb-6">{item.title}</h2>
-            <p className="text-lg text-black">{item.text}</p>
+            <p className="text-lg text-black mb-8 lg:mb-0">{item.text}</p>
+            
+            {/* Mobile Image - shows under text on mobile only */}
+            <div className="lg:hidden mt-8">
+              <Image
+                src={item.image}
+                alt={item.title}
+                width={800}
+                height={600}
+                style={{ 
+                  objectFit: 'cover', 
+                  objectPosition: 'center'
+                }}
+                className="w-full h-[300px] rounded-xl"
+                priority={i === 0}
+              />
+            </div>
           </div>
         ))}
       </div>
 
-      {/* Right: Sticky Image */}
+      {/* Right: Sticky Image - Desktop only (unchanged) */}
       <div className="w-full lg:w-1/2 hidden lg:flex sticky top-0 h-screen items-center justify-center">
         <Image
           src={sections[activeIndex].image}
