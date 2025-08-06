@@ -27,9 +27,26 @@ function Navbar() {
   }, [open]);
 
   const handleItemClick = (href) => {
-    // Check if it's a hash link (for same page navigation) or a route change
-    if (href.startsWith('#')) {
-      window.location.hash = href;
+    // Check if it's a hash link for same page navigation
+    if (href.startsWith('/#')) {
+      // Extract the hash part and navigate to section
+      const sectionId = href.substring(2); // Remove "/#"
+      if (window.location.pathname !== '/') {
+        // If we're not on home page, go to home first
+        window.location.href = href;
+      } else {
+        // If we're on home page, scroll to section
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else if (href.startsWith('#')) {
+      // Hash link for current page
+      const element = document.getElementById(href.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     } else {
       // Navigate to new page
       window.location.href = href;

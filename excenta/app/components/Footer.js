@@ -2,6 +2,32 @@
 
 // Footer.js
 const Footer = () => {
+  const handleNavClick = (href) => {
+    if (href.startsWith('/#')) {
+      // Extract the hash part and navigate to section
+      const sectionId = href.substring(2); // Remove "/#"
+      if (window.location.pathname !== '/') {
+        // If we're not on home page, go to home first
+        window.location.href = href;
+      } else {
+        // If we're on home page, scroll to section
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else if (href.startsWith('#')) {
+      // Hash link for current page
+      const element = document.getElementById(href.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to new page or external link
+      window.location.href = href;
+    }
+  };
+
   return (
     <footer className="bg-[#252422] text-white text-sm">
       <div className="max-w-[1200px] mx-auto px-6 py-16 flex flex-col lg:flex-row gap-12">
@@ -42,24 +68,24 @@ const Footer = () => {
         <div className="lg:w-2/3 grid grid-cols-2 sm:grid-cols-4 gap-8">
           <div className="flex flex-col gap-2">
             <h3 className="uppercase tracking-wider text-xs mb-2">Utforsk</h3>
-            <a href="/" className="hover:underline">
+            <button onClick={() => handleNavClick("/")} className="hover:underline text-left">
               Hjem
-            </a>
-            <a href="/#prosjekter" className="hover:underline">
+            </button>
+            <button onClick={() => handleNavClick("/#prosjekter")} className="hover:underline text-left">
               Prosjekter
-            </a>
-            <a href="/about" className="hover:underline">
+            </button>
+            <button onClick={() => handleNavClick("/about")} className="hover:underline text-left">
               Om oss
-            </a>
-            <a href="/#tjenester" className="hover:underline">
+            </button>
+            <button onClick={() => handleNavClick("/#tjenester")} className="hover:underline text-left">
               Tjenester
-            </a>
+            </button>
           </div>
           <div className="flex flex-col gap-2">
             <h3 className="uppercase tracking-wider text-xs mb-2">Kontakt</h3>
-            <a href="/contact" className="hover:underline">
+            <button onClick={() => handleNavClick("/contact")} className="hover:underline text-left">
               Kontakt oss
-            </a>
+            </button>
             <a href="mailto:post@excenta.no" className="hover:underline">
               E-post
             </a>

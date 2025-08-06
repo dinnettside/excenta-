@@ -23,7 +23,7 @@ const AboutPage = () => {
             Excenta AS skaper skreddersydde interiørløsninger der tidløs design møter presisjon.
           </p>
           <a
-            href="#contact"
+            href="/contact"
             className="inline-flex items-center gap-2 text-sm uppercase tracking-wider border-b border-black pb-1 hover:border-[#252422] transition-colors duration-300"
           >
             Kontakt oss <span aria-hidden="true">→</span>
@@ -49,7 +49,7 @@ const AboutPage = () => {
           </p>
           <div className="mt-6">
             <a
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center gap-2 text-sm uppercase tracking-wider border-b border-black pb-1 hover:border-[#252422] transition-colors duration-300"
             >
               Kontakt oss <span aria-hidden="true">→</span>
