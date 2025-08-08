@@ -4,26 +4,21 @@
 const Footer = () => {
   const handleNavClick = (href) => {
     if (href.startsWith('/#')) {
-      // Extract the hash part and navigate to section
       const sectionId = href.substring(2); // Remove "/#"
       if (window.location.pathname !== '/') {
-        // If we're not on home page, go to home first
         window.location.href = href;
       } else {
-        // If we're on home page, scroll to section
         const element = document.getElementById(sectionId);
         if (element) {
           element.scrollIntoView({ behavior: 'smooth' });
         }
       }
     } else if (href.startsWith('#')) {
-      // Hash link for current page
       const element = document.getElementById(href.substring(1));
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
       }
     } else {
-      // Navigate to new page or external link
       window.location.href = href;
     }
   };
@@ -34,7 +29,6 @@ const Footer = () => {
         {/* Logo + tagline */}
         <div className="lg:w-1/3 flex flex-col gap-4">
           <div className="flex items-center gap-2">
-            {/* Logo icon */}
             <img 
               src="/favicon.webp" 
               alt="Excenta logo" 
@@ -45,7 +39,6 @@ const Footer = () => {
           <p className="max-w-xs">
             Skreddersydd interiør der design møter tidløs kvalitet.
           </p>
-          {/* Back to top */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             aria-label="Til toppen"
@@ -90,12 +83,6 @@ const Footer = () => {
             <button onClick={() => handleNavClick("/contact")} className="hover:underline text-left">
               Kontakt oss
             </button>
-            <a href="mailto:post@excenta.no" className="hover:underline">
-              E-post
-            </a>
-            <a href="tel:+4712345678" className="hover:underline">
-              Telefon
-            </a>
           </div>
         </div>
       </div>

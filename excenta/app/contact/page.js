@@ -2,12 +2,33 @@
 "use client";
 
 import Footer from "../components/Footer";
+import { useState } from "react";
 
 const ContactPage = () => {
-  const handleSubmit = (e) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Her kan du legge til form submission logic senere
-    console.log('Form submitted');
+    const form = new FormData(e.currentTarget);
+    const payload = Object.fromEntries(form.entries());
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error("Bad response");
+
+      alert("Takk! Meldingen er sendt.");
+      e.currentTarget.reset();
+    } catch {
+      alert("Kunne ikke sende meldingen. Prøv igjen senere.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -23,26 +44,27 @@ const ContactPage = () => {
 
           {/* Kontaktinfo */}
           <div className="space-y-4 mb-12">
-            <a href="mailto:post@excenta.no" className="block hover:underline text-lg">
-              ✉ post@excenta.no
+            <a href="mailto:ola@excenta.no" className="block hover:underline text-lg">
+              ✉ ola@excenta.no
             </a>
-            <a href="tel:+4712345678" className="block hover:underline text-lg">
-              ☏ +47 123 45 678
+            <a href="tel:+4746802748" className="block hover:underline text-lg">
+              ☏ +47 46 80 27 48
             </a>
             <p className="text-sm text-gray-600">Man–Fre 08:00–16:00</p>
           </div>
 
           {/* Skjema */}
           <form onSubmit={handleSubmit} className="space-y-6">
+            <input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden" />
+
             <div>
               <label className="block text-sm font-medium mb-1" htmlFor="name">Navn</label>
               <input
                 type="text"
                 id="name"
                 name="name"
-                placeholder="Ditt navn"
                 required
-                className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-black/20 bg-white"
+                className="w-full border border-gray-300 p-3 rounded-md"
               />
             </div>
             <div>
@@ -51,9 +73,8 @@ const ContactPage = () => {
                 type="email"
                 id="email"
                 name="email"
-                placeholder="din@epost.no"
                 required
-                className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-black/20 bg-white"
+                className="w-full border border-gray-300 p-3 rounded-md"
               />
             </div>
             <div>
@@ -62,8 +83,7 @@ const ContactPage = () => {
                 type="tel"
                 id="phone"
                 name="phone"
-                placeholder="+47 123 45 678"
-                className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-black/20 bg-white"
+                className="w-full border border-gray-300 p-3 rounded-md"
               />
             </div>
             <div>
@@ -72,9 +92,8 @@ const ContactPage = () => {
                 id="message"
                 name="message"
                 rows={5}
-                placeholder="Skriv din melding her…"
                 required
-                className="w-full border border-gray-300 p-3 rounded-md focus:outline-none focus:ring-2 focus:ring-black/20 bg-white resize-vertical"
+                className="w-full border border-gray-300 p-3 rounded-md"
               />
             </div>
             <div className="flex items-start space-x-2">
@@ -93,7 +112,7 @@ const ContactPage = () => {
               type="submit"
               className="w-full bg-[#252422] text-white py-3 rounded-md uppercase tracking-wider text-sm hover:bg-black transition-colors duration-300"
             >
-              Send melding
+              {loading ? "Sender..." : "Send melding"}
             </button>
           </form>
         </div>
