@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+/* resten av dine globale regler kan stå under her */
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --nav-height: 64px;
+}
+
+.pt-nav {
+  padding-top: var(--nav-height);
+}
+
+[id] {
+  scroll-margin-top: calc(var(--nav-height) + 16px);
+}
