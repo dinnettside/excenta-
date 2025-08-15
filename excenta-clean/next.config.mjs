@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: { ignoreDuringBuilds: true }, // ← lar build passere selv om ESLint feiler
-  images: { unoptimized: true },        // ← Netlify uten image-opt server
-  output: 'standalone',
+  eslint: { ignoreDuringBuilds: true }, // valgfritt: la prod-build gå selv om ESLint klager
+  images: { unoptimized: true },        // enkelt på Netlify uten image-server
 };
-
 export default nextConfig;
