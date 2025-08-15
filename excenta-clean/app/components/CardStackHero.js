@@ -3,11 +3,11 @@ import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const images = [
-  "/kitchen3.webp",
-  "/kitchen2.webp",
-  "/kitchen1.webp",
-  "/kitchen4.webp",
-  "/kitchen5.webp",
+  "/kjokken3.webp",
+  "/kjokken2.webp",
+  "/kjokken1.webp",
+  "/kjokken4.webp",
+  "/kjokken5.webp",
 ];
 
 export default function CardStackHero() {
