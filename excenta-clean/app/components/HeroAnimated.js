@@ -5,7 +5,7 @@ const IMAGES = [
     { src: "/kitchen.webp", size: 220, rotate: -10, offset: [20, -40], delay: 0 },
     { src: "/bathroom.webp", size: 300, rotate: 5, offset: [180, 60], delay: 150 },
     { src: "/bookcase0.webp", size: 180, rotate: -5, offset: [320, -80], delay: 300 },
-    { src: "/kjokken2.webp", size: 260, rotate: 8, offset: [450, 40], delay: 450 },
+    { src: "/kjokken1.webp", size: 260, rotate: 8, offset: [450, 40], delay: 450 },
     { src: "/closet.webp", size: 190, rotate: -12, offset: [-60, 120], delay: 600 },
     { src: "/tvunit.webp", size: 240, rotate: 3, offset: [80, -160], delay: 750 },
 ];

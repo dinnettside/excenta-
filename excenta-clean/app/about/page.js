@@ -73,7 +73,7 @@ const AboutPage = () => {
         <ScrollReveal direction="right" delay={150} className="lg:w-1/2 flex justify-end">
           <div className="relative w-full max-w-[400px]">
             <img
-              src="/omoss.webp"
+              src="/kjokken2.webp"
               alt="Materialer og håndverk"
               className="w-full h-auto object-cover rounded-lg shadow-lg"
               loading="lazy"
