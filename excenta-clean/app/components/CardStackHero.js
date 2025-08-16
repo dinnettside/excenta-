@@ -78,7 +78,7 @@ export default function CardStackHero() {
               boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
               willChange: "transform",
             }}
-            className="md:hidden absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl"
+            className="md:hidden absolute left-1/2 top-[40%] -translate-x-1/2 -translate-y-1/2 rounded-2xl"
             initial={false}
             transition={{ type: "spring", damping: 30, stiffness: 100 }}
           />
