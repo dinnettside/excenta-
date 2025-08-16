@@ -2,7 +2,7 @@
 "use client";
 
 import ContactSection from "../components/ContactSection"; // gjenbruk kontaktseksjon
-import Footer from "../components/Footer";
+// Footer rendres globalt i layout.js
 import HeroAnimated from "../components/HeroAnimated";
 import { ScrollReveal } from "../components/ScrollReveal";
 import ScrollSlideshow from "../components/ScrollSlideshow";
@@ -89,9 +89,6 @@ const AboutPage = () => {
       <div id="contact">
         <ContactSection />
       </div>
-
-      {/* Footer */}
-      <Footer />
     </main>
   );
 };

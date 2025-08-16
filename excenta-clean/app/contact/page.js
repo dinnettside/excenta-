@@ -1,7 +1,7 @@
 // ContactPage.js
 "use client";
 
-import Footer from "../components/Footer";
+// Footer rendres globalt i layout.js
 import { useState } from "react";
 
 const ContactPage = () => {
@@ -128,8 +128,6 @@ const ContactPage = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <Footer />
     </main>
   );
 };
