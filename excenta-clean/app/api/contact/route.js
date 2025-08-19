@@ -1,19 +1,35 @@
 import nodemailer from 'nodemailer';
 
 export async function POST(request) {
+  console.log('📧 Contact form API called');
+  
   try {
     const body = await request.json();
     const { name, email, phone, message, company } = body;
+    
+    console.log('📝 Form data received:', { name, email, phone: phone || 'not provided', hasMessage: !!message });
 
     // Simple spam check - honeypot field
     if (company) {
+      console.log('🚫 Spam detected via honeypot field');
       return Response.json({ error: 'Spam detected' }, { status: 400 });
     }
 
     // Validate required fields
     if (!name || !email || !message) {
+      console.log('❌ Missing required fields:', { hasName: !!name, hasEmail: !!email, hasMessage: !!message });
       return Response.json({ error: 'Missing required fields' }, { status: 400 });
     }
+
+    // Log environment variables (safely)
+    console.log('🔧 SMTP Config:', {
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      user: process.env.SMTP_USER ? 'set' : 'missing',
+      pass: process.env.SMTP_PASS ? 'set' : 'missing',
+      to: process.env.CONTACT_TO,
+      from: process.env.CONTACT_FROM
+    });
 
     // Create transporter for One.com SMTP
     const transporter = nodemailer.createTransporter({
@@ -25,6 +41,8 @@ export async function POST(request) {
         pass: process.env.SMTP_PASS,
       },
     });
+
+    console.log('📬 Transporter created, attempting to send email...');
 
     // Email content
     const htmlMessage = `
@@ -39,7 +57,7 @@ export async function POST(request) {
     `;
 
     // Send email
-    await transporter.sendMail({
+    const result = await transporter.sendMail({
       from: process.env.CONTACT_FROM,
       to: process.env.CONTACT_TO,
       subject: `Ny henvendelse fra ${name}`,
@@ -47,12 +65,19 @@ export async function POST(request) {
       replyTo: email,
     });
 
+    console.log('✅ Email sent successfully:', result.messageId);
     return Response.json({ success: true }, { status: 200 });
 
   } catch (error) {
-    console.error('Contact form error:', error);
+    console.error('❌ Contact form error:', error);
+    console.error('Error details:', {
+      message: error.message,
+      code: error.code,
+      command: error.command
+    });
+    
     return Response.json(
-      { error: 'Failed to send email' }, 
+      { error: 'Failed to send email', details: error.message }, 
       { status: 500 }
     );
   }
