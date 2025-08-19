@@ -2,5 +2,5 @@
   command = "npm run build"
   base = "excenta-clean"
 
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
+[build.environment]
+  NODE_VERSION = "20"
