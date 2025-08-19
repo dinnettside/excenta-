@@ -1,36 +1,8 @@
 // ContactPage.js
-"use client";
 
 // Footer rendres globalt i layout.js
-import { useState } from "react";
 
 const ContactPage = () => {
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const form = new FormData(e.currentTarget);
-    const payload = Object.fromEntries(form.entries());
-
-    setLoading(true);
-    try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-
-      if (!res.ok) throw new Error("Bad response");
-
-      alert("Takk! Meldingen er sendt.");
-      e.currentTarget.reset();
-    } catch {
-      alert("Kunne ikke sende meldingen. Prøv igjen senere.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
     <main className="bg-[#f9f6ef] text-gray-900">
       {/* Hero */}
@@ -54,8 +26,9 @@ const ContactPage = () => {
           </div>
 
           {/* Skjema */}
-          <form onSubmit={handleSubmit} className="space-y-6">
-            <input type="text" name="company" tabIndex={-1} autoComplete="off" className="hidden" />
+          <form name="contact" method="POST" data-netlify="true" className="space-y-6">
+            {/* Hidden field for spam protection */}
+            <input type="hidden" name="form-name" value="contact" />
 
             <div>
               <label className="block text-sm font-medium mb-1" htmlFor="name">Navn</label>
@@ -112,7 +85,7 @@ const ContactPage = () => {
               type="submit"
               className="w-full bg-[#252422] text-white py-3 rounded-md uppercase tracking-wider text-sm hover:bg-black transition-colors duration-300"
             >
-              {loading ? "Sender..." : "Send melding"}
+              Send melding
             </button>
           </form>
         </div>
