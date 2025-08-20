@@ -2,8 +2,5 @@
 const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
   images: { unoptimized: true },
-  output: 'export',
-  trailingSlash: true,
-  distDir: 'out'
 };
 export default nextConfig;

@@ -57,28 +57,19 @@ export async function POST(request) {
     `;
 
     // Send email
-    const result = await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: process.env.CONTACT_FROM,
       to: process.env.CONTACT_TO,
       subject: `Ny henvendelse fra ${name}`,
       html: htmlMessage,
-      replyTo: email,
     });
 
-    console.log('✅ Email sent successfully:', result.messageId);
-    return Response.json({ success: true }, { status: 200 });
+    console.log('✅ Email sent successfully! Message ID:', info.messageId);
+
+    return Response.json({ success: true, messageId: info.messageId });
 
   } catch (error) {
-    console.error('❌ Contact form error:', error);
-    console.error('Error details:', {
-      message: error.message,
-      code: error.code,
-      command: error.command
-    });
-    
-    return Response.json(
-      { error: 'Failed to send email', details: error.message }, 
-      { status: 500 }
-    );
+    console.error('❌ Error in contact API:', error);
+    return Response.json({ error: 'Failed to send email', details: error.message }, { status: 500 });
   }
 }
