@@ -65,20 +65,24 @@ export default function CardStackHero() {
     <div ref={containerRef} className="relative w-full h-[90vh] bg-[#f9f6ef]">
       <div className="min-h-[55vh] flex items-center justify-center">
         <div className="relative w-full h-[800px] flex items-center justify-center">
-          {/* Mobile version - single centered image */}
+          {/* LCP Image - prioritert for mobil */}
+          <img
+            src={images[2]}
+            alt="Skreddersydde kjøkkenmøbler"
+            className="md:hidden absolute left-1/2 top-[20%] -translate-x-1/2 -translate-y-1/2 w-[280px] h-[420px] rounded-2xl object-cover shadow-[0_20px_40px_rgba(0,0,0,0.15)] z-20"
+            loading="eager"
+            fetchPriority="high"
+            width="280"
+            height="420"
+          />
+
+          {/* Mobile version - motion wrapper */}
           <motion.div
             style={{
               y: mobileY,
               zIndex: 20,
-              width: "280px", // Smaller for mobile
-              height: "420px", // Smaller for mobile
-              backgroundImage: `url(${images[2]})`, // Center image
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
-              willChange: "transform",
             }}
-            className="md:hidden absolute left-1/2 top-[20%] -translate-x-1/2 -translate-y-1/2 rounded-2xl"
+            className="md:hidden absolute left-1/2 top-[20%] -translate-x-1/2 -translate-y-1/2 w-[280px] h-[420px] rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.15)] pointer-events-none"
             initial={false}
             transition={{ type: "spring", damping: 30, stiffness: 100 }}
           />
@@ -99,18 +103,19 @@ export default function CardStackHero() {
                     rotate: transform.rotate,
                     scale: transform.scale,
                     zIndex: 20 - level,
-                    width: "340px",
-                    height: "510px",
-                    backgroundImage: `url(${image})`,
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                    boxShadow: "0 20px 40px rgba(0, 0, 0, 0.15)",
-                    willChange: "transform",
                   }}
-                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl"
+                  className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] h-[510px] rounded-2xl overflow-hidden shadow-[0_20px_40px_rgba(0,0,0,0.15)]"
                   initial={false}
                   transition={{ type: "spring", damping: 30, stiffness: 100 }}
-                />
+                >
+                  <img
+                    src={image}
+                    alt="Skreddersydde kjøkkenmøbler"
+                    className="w-full h-full object-cover"
+                    loading={index === 2 ? "eager" : "lazy"}
+                    fetchPriority={index === 2 ? "high" : "auto"}
+                  />
+                </motion.div>
               );
             })}
           </div>
