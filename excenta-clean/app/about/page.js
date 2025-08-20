@@ -36,8 +36,8 @@ const AboutPage = () => {
             <HeroAnimated />
           </div>
           
-          {/* Mobile version - enkelt bilde (kun mobil) */}
-          <div className="block lg:hidden w-full max-w-[350px] mx-auto">
+          {/* Mobile version - skjult */}
+          <div className="hidden">
             <img
               src="/kitchen1.webp"
               alt="Vårt håndverk"
