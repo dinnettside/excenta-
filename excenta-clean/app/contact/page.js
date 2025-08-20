@@ -15,8 +15,8 @@ const ContactPage = () => {
     const formData = new FormData(form);
 
     try {
-      // Bruk Formspree (gratis tjeneste)
-      const response = await fetch("https://formspree.io/f/xdkoyqbo", {
+      // Bruk din nye Formspree endpoint
+      const response = await fetch("https://formspree.io/f/xjkoqjdb", {
         method: "POST",
         body: formData,
         headers: {
