@@ -44,6 +44,20 @@ export async function POST(request) {
 
     console.log('📬 Transporter created, attempting to send email...');
 
+    // Test SMTP connection first
+    try {
+      await transporter.verify();
+      console.log('✅ SMTP connection verified successfully');
+    } catch (smtpError) {
+      console.error('❌ SMTP connection failed:', {
+        code: smtpError.code,
+        command: smtpError.command,
+        response: smtpError.response,
+        message: smtpError.message
+      });
+      throw smtpError;
+    }
+
     // Email content
     const htmlMessage = `
       <h2>Ny henvendelse fra Excenta.no</h2>
@@ -69,7 +83,17 @@ export async function POST(request) {
     return Response.json({ success: true, messageId: info.messageId });
 
   } catch (error) {
-    console.error('❌ Error in contact API:', error);
-    return Response.json({ error: 'Failed to send email', details: error.message }, { status: 500 });
+    console.error('❌ Error in contact API:', {
+      message: error.message,
+      code: error.code,
+      command: error.command,
+      response: error.response,
+      stack: error.stack
+    });
+    return Response.json({ 
+      error: 'Failed to send email', 
+      details: error.message,
+      code: error.code 
+    }, { status: 500 });
   }
 }
