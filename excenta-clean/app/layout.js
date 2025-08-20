@@ -11,7 +11,7 @@ export const metadata = {
   creator: 'Excenta AS',
   openGraph: {
     title: 'Excenta AS',
-    description: 'Skreddersydde møbler og interiør.',
+    description: 'Skreddersydde møbler og interiör.',
     url: 'https://excenta.no',
     siteName: 'Excenta AS',
     locale: 'nb_NO',
@@ -25,11 +25,6 @@ export const metadata = {
       follow: true,
     },
   },
-  icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon.ico',
-    apple: '/favicon.ico',
-  },
 };
 
 const inter = Inter({ subsets: ["latin"] });
@@ -37,12 +32,8 @@ const inter = Inter({ subsets: ["latin"] });
 export default function RootLayout({ children }) {
   return (
     <html lang="no">
-      <head>
-        <link rel="icon" href="/favicon.ico" sizes="any" />
-        <link rel="shortcut icon" href="/favicon.ico" />
-      </head>
       <body className={`${inter.className} bg-[#f9f6ef] text-gray-900 antialiased`}>
-        <Navbar /> {/* client-komponent, helt ok å importere her */}
+        <Navbar />
         <main className="pt-nav">{children}</main>
         <Footer />
       </body>
