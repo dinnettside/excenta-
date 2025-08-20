@@ -1,10 +1,10 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 
 const images = [
   "/kjokken3.webp",
-  "/kjokken2.webp", 
+  "/kjokken2.webp",
   "/kjokken1.webp",
   "/kjokken4.webp",
   "/kjokken5.webp",
@@ -12,24 +12,11 @@ const images = [
 
 export default function CardStackHero() {
   const containerRef = useRef(null);
-  const [isMobile, setIsMobile] = useState(false);
-
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "start end"],
     layoutEffect: false,
   });
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768);
-    };
-    
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   // Define transforms for each image outside the map
   const fanRotations = [-0, -0, 0, 0, 0];
@@ -92,23 +79,15 @@ export default function CardStackHero() {
             initial={false}
             transition={{ type: "spring", damping: 30, stiffness: 100 }}
           >
-            <picture>
-              <source 
-                media="(max-width: 767px)" 
-                srcSet="/kjokken1-mobile.webp" 
-                width="280" 
-                height="420"
-              />
-              <img
-                src={images[2]}
-                alt="Skreddersydde kjøkkenmøbler"
-                className="w-full h-full object-cover"
-                loading="eager"
-                fetchPriority="high"
-                width="280"
-                height="420"
-              />
-            </picture>
+            <img
+              src={images[2]}
+              alt="Skreddersydde kjøkkenmøbler"
+              className="w-full h-full object-cover"
+              loading="eager"
+              fetchPriority="high"
+              width="280"
+              height="420"
+            />
           </motion.div>
 
           {/* Desktop version - all images with fan animation */}
